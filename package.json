@@ -6,6 +6,7 @@
   "scripts": {
     "eslint:fix": "eslint --fix",
     "dev": "ts-node -T ./src/server.ts",
+    "watch": "nodemon --watch './src/**/*.ts' --ignore '.src/**/*.spec.ts' --exec 'ts-node' ./src/server.ts",
     "run": "node ./build/index.js",
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
