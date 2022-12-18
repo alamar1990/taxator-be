@@ -1,24 +1,24 @@
-import {Router} from 'express'
-import {UserUseCase} from '../../application/userUseCase'
-import {UserController} from '../controller/user.ctrl'
-import {MockRepository} from '../repository/mock.repository'
-import {MongoRepository} from '../repository/mongo.repository'
+import { Router } from 'express'
+import { UserUseCase } from '../../application/userUseCase'
+import { UserController } from '../controller/user.ctrl'
+import { MockRepository } from '../repository/mock.repository'
+import { MongoRepository } from '../repository/mongo.repository'
 
 const route = Router()
 /**
- * Iniciar Repository, seleccionar entre el tipo de BD
+ * Start Repository, here we can switch between ORMs with repositories
  */
 const userRepo = new MongoRepository()
 // const userRepo = new MockRepository()
 
 /**
- * Iniciamos casos de uso
+ * Use cases
  */
 
 const userUseCase = new UserUseCase(userRepo)
 
 /**
- * Iniciar User Controller
+ * User controllers
  */
 
 const userCtrl = new UserController(userUseCase)
