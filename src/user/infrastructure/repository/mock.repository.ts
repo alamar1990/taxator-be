@@ -1,6 +1,3 @@
-/**
- * Infra! Mongo 🙌
- */
 import { UserEntity } from '../../domain/user.entity'
 import { UserRepository } from '../../domain/user.repository'
 
@@ -21,6 +18,7 @@ export class MockRepository implements UserRepository {
     return user
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async registerUser(userIn: UserEntity): Promise<any> {
     const user = MOCK_USER
     return user

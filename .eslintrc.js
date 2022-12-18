@@ -29,7 +29,7 @@ module.exports = {
         tabWidth: 2,
         arrowParens: 'always',
         endOfLine: 'auto',
-        'max-len': ['error', {code: 120}]
+        'max-len': ['error', { code: 120 }]
       }
     ],
     'class-methods-use-this': 'off',
@@ -39,32 +39,6 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     'import/prefer-default-export': 'off',
     'import/no-unresolved': 'off',
-    'import/order': 'off',
-    'import/extensions': [
-      'error',
-      {
-        ts: 'never'
-      }
-    ],
-    'import-helpers/order-imports': [
-      'warn',
-      {
-        newlinesBetween: 'always',
-        groups: [
-          'module',
-          '/^@external/',
-          '/^@middlewares/',
-          '/^@repositories/',
-          '/^@useCases/',
-          '/^@controllers/',
-          '/^@entities/',
-          '/^@shared/',
-          ['parent', 'sibling', 'index'],
-          '/^~/',
-          '/^@interfaces/'
-        ],
-        alphabetize: {order: 'asc', ignoreCase: true}
-      }
-    ]
+    'import/order': 'off'
   }
 }
