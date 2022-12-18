@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import dbInit from '../user/infrastructure/db/mongo'
-import userRoute from '../user/infrastructure/route/user.route'
+import dbInit from '../modules/user/infrastructure/db/mongo'
+import userRoute from '../modules/user/infrastructure/route/user.route'
 
 // import { apiRoutes } from './routes'
 
