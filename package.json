@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "eslint:fix": "eslint --fix",
-    "dev": "ts-node ./src/server.ts",
+    "dev": "ts-node -T ./src/server.ts",
     "run": "node ./build/index.js",
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,10 +15,12 @@
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-hexagonal-architecture": "^1.0.3",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.1",
     "ts-node": "^10.9.1",
@@ -27,6 +29,14 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^6.8.0",
+    "uuid": "^9.0.0"
+  },
+  "eslintConfig": {
+    "rules": {
+      "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 0
+    }
   }
 }

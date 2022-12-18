@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import dbInit from '../user/db/mongo'
+import userRoute from '../user/infrastructure/route/user.route'
 
 // import { apiRoutes } from './routes'
 
@@ -18,11 +20,12 @@ const options: cors.CorsOptions = {
 app.use(express.json())
 app.use(cors(options))
 
-// app.use(apiRoutes)
+app.use(userRoute)
+dbInit().then()
 
 // Test route to /
 app.get('/', (_req, res) => {
-  res.send({ message: 'Taxator API started' })
+  res.send({message: 'Taxator API started'})
 })
 
-export { app }
+export {app}

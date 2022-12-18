@@ -1,10 +1,19 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+  plugins: ['hexagonal-architecture'],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module'
   },
+  overrides: [
+    {
+      files: ['contexts/{backend,frontend}/*/src/**/*.ts'],
+      rules: {
+        'hexagonal-architecture/enforce': ['error']
+      }
+    }
+  ],
   env: {
     es6: true,
     node: true
