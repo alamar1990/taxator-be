@@ -9,6 +9,10 @@ const UserSchema = new Schema(
       type: String,
       unique: true
     },
+    password: {
+      type: String,
+      unique: true
+    },
     uuid: {
       type: String,
       unique: true
