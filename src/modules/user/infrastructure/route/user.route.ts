@@ -3,13 +3,15 @@ import { UserUseCase } from '../../application/userUseCase'
 import { UserController } from '../controller/user.ctrl'
 import { MockRepository } from '../repository/mock.repository'
 import { MongoRepository } from '../repository/mongo.repository'
+import { MySqlRepository } from '../repository/mysql.repository'
 
 const route = Router()
 /**
  * Start Repository, here we can switch between ORMs with repositories
  */
 // const userRepo = new MongoRepository()
-const userRepo = new MockRepository()
+// const userRepo = new MockRepository()
+const userRepo = new MySqlRepository()
 
 /**
  * Use cases
@@ -28,6 +30,6 @@ const userCtrl = new UserController(userUseCase)
  */
 
 route.post(`/user`, userCtrl.insertCtrl)
-route.get(`/user`, userCtrl.getCtrl)
+route.get(`/user`, userCtrl.listAllCtrl)
 
 export default route

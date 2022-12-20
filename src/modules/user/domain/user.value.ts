@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid'
 export class UserValue implements UserEntity {
   description: string
   email: string
+  password: string
   name: string
   role: string
   uuid: string
@@ -28,6 +29,4 @@ export class UserValue implements UserEntity {
     this.email = email
     this.description = description ?? 'default'
   }
-
-  password: string
 }

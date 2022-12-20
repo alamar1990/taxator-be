@@ -24,7 +24,7 @@ export class MockRepository implements UserRepository {
     return user
   }
 
-  async listUser(): Promise<any> {
+  async listUsers(): Promise<any> {
     const users = [MOCK_USER, MOCK_USER, MOCK_USER]
     return users
   }

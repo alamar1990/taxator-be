@@ -19,7 +19,7 @@ export class MongoRepository implements UserRepository {
     return user
   }
 
-  async listUser(): Promise<any> {
+  async listUsers(): Promise<any> {
     const user = await UserModel.find()
     return user
   }

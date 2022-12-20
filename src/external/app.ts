@@ -1,7 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import dbInit from '../modules/user/infrastructure/db/mongo'
+import mongoDbInit from '../modules/user/infrastructure/db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
+import { sequelizeDbInit } from '../modules/user/infrastructure/db/mysql'
 
 // import { apiRoutes } from './routes'
 
@@ -21,7 +22,11 @@ app.use(express.json())
 app.use(cors(options))
 
 app.use(userRoute)
-dbInit().then()
+
+// MongoDB Init
+mongoDbInit().then()
+// mysql Init
+sequelizeDbInit().then()
 
 // Test route to /
 app.get('/', (_req, res) => {

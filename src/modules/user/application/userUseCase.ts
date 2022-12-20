@@ -7,23 +7,29 @@ export class UserUseCase {
   public async registerUser({
     name,
     email,
+    password,
     description,
     role
   }: {
     name: string
     email: string
+    password: string
     description: string
     role: string
   }) {
-    const userValue = new UserValue({ name, email, role, description })
+    const userValue = new UserValue({ name, email, password, role, description })
     const userCreated = await this.userRepository.registerUser(userValue)
     return userCreated
   }
 
-  public getDetailUser = async (uuid: string) => {
-    const user = await this.userRepository.findUserById(uuid)
+  public getDetailUser = async (id: number) => {
+    const user = await this.userRepository.findUserById(id)
     return user
   }
 
+  public getAllUsers = async () => {
+    const users = await this.userRepository.listUsers()
+    return users
+  }
   public registerUserAndNotify() {}
 }
