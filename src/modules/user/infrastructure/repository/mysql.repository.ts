@@ -9,19 +9,24 @@ import UserModel from '../model/user.schema.sequelize'
  * Mysql!
  */
 export class MySqlRepository implements UserRepository {
-  async findUserById(id: number): Promise<UserEntity> {
-    const user = await UserModel.findByPk({ id })
-    return user
+  async all(): Promise<UserEntity[]> {
+    const users = await UserModel.findAll()
+    return users
   }
 
-  async registerUser(userIn: UserEntity): Promise<UserEntity> {
+  async create(userIn: UserEntity): Promise<UserEntity> {
     const user = new UserModel(userIn)
     await user.save()
     return user
   }
 
-  async listUsers(): Promise<UserEntity[]> {
-    const users = await UserModel.findAll()
-    return users
+  async view(id): Promise<UserEntity> {
+    const user = await UserModel.findByPk(id)
+    return user
+  }
+  async updateUserById(id: number): Promise<UserEntity | null> {
+    const user = await UserModel.findByPk({ id })
+
+    return user
   }
 }

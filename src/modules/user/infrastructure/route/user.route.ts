@@ -1,11 +1,14 @@
 import { Router } from 'express'
 import { UserUseCase } from '../../application/userUseCase'
-import { UserController } from '../controller/user.ctrl'
+import { UserController } from '../controller/user.controller'
 import { MockRepository } from '../repository/mock.repository'
 import { MongoRepository } from '../repository/mongo.repository'
 import { MySqlRepository } from '../repository/mysql.repository'
 
-const route = Router()
+import resource from '../../../../resources/baseRouteCRUDresource'
+// import { baseControllerCRUDResource } from '../../../../resources/baseControllerCRUDResource'
+
+const userRoute = Router()
 /**
  * Start Repository, here we can switch between ORMs with repositories
  */
@@ -16,7 +19,6 @@ const userRepo = new MySqlRepository()
 /**
  * Use cases
  */
-
 const userUseCase = new UserUseCase(userRepo)
 
 /**
@@ -28,8 +30,7 @@ const userCtrl = new UserController(userUseCase)
 /**
  *
  */
+const prefix = 'user'
+userRoute.use(`/${prefix}`, resource(userCtrl))
 
-route.post(`/user`, userCtrl.insertCtrl)
-route.get(`/user`, userCtrl.listAllCtrl)
-
-export default route
+export default userRoute
