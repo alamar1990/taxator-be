@@ -1,8 +1,8 @@
 import { app } from './external/app'
-import 'dotenv/config'
+import { config } from './config'
 
-const port = process.env.PORT || 5000
+const PORT = config.PORT || 5000
 
-app.listen(port, () => {
-  console.log(`Listening on port: ${port}`)
+app.listen(PORT, () => {
+  console.log(`🚀 Application Taxator-Backend running on PORT -> ${PORT}`)
 })

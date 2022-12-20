@@ -1,15 +1,16 @@
 import mongoose from 'mongoose'
+import { config } from '../../../../config'
 
 const DB_URI = process.env.DB_URI || 'mongodb://localhost'
 
-const dbInit = async () => {
+const mongoDbInit = async () => {
   try {
     mongoose.set('strictQuery', true)
     // @ts-ignore
     await mongoose.connect(DB_URI, {
-      dbName: process.env.DB_NAME,
-      user: process.env.DB_USERNAME,
-      pass: process.env.DB_PASSWORD,
+      dbName: config.DB_NAME,
+      user: config.DB_MONGO_USERNAME,
+      pass: config.DB_MONGO_PASSWORD,
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
@@ -19,4 +20,4 @@ const dbInit = async () => {
   }
 }
 
-export default dbInit
+export default mongoDbInit
