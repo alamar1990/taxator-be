@@ -18,6 +18,7 @@ export type Configuration = {
   DB_USERNAME: string
   APP_NAME: string
   DB_NAME: string
+  DB_HOST: string
   APP_DATABASE_URL: string
 
   APP_LOG_LEVEL: string

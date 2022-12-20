@@ -9,6 +9,7 @@ const DEV: Configuration = {
   DB_MONGO_USERNAME: process.env.DB_MONGO_USERNAME || '',
   DB_MONGO_PASSWORD: process.env.DB_MONGO_PASSWORD || '',
   APP_NAME: process.env.APP_NAME || 'taxator-be',
+  DB_HOST: process.env.DB_HOST || '',
   APP_DATABASE_URL: process.env.APP_DATABASE_URL || '',
   APP_LOG_LEVEL: process.env.APP_LOG_LEVEL || 'debug'
 }
