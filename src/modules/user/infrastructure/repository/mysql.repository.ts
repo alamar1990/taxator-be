@@ -1,5 +1,5 @@
 /**
- * Infra! Mongo 🙌
+ * Infra! MySql 🙌
  */
 import { UserEntity } from '../../domain/user.entity'
 import { UserRepository } from '../../domain/user.repository'
@@ -9,6 +9,9 @@ import UserModel from '../model/user.schema.sequelize'
  * Mysql!
  */
 export class MySqlRepository implements UserRepository {
+  /*
+   * CRUD methods***********************
+   * */
   async all(): Promise<UserEntity[]> {
     const users = await UserModel.findAll()
     return users
@@ -38,6 +41,15 @@ export class MySqlRepository implements UserRepository {
     const user = await UserModel.destroy({
       where: {
         id: id
+      }
+    })
+    return user
+  }
+  //**********************************************************
+  async findByEmail(email): Promise<UserEntity> {
+    const user = await UserModel.findOne({
+      where: {
+        email: email
       }
     })
     return user
