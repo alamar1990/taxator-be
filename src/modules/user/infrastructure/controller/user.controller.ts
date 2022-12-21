@@ -29,8 +29,8 @@ export class UserController extends BaseResourceController {
 
   async view({ params }: Request, res: Response) {
     try {
-      const devices = await this.userUseCase.view(params.id)
-      return res.send({ result: devices })
+      const user = await this.userUseCase.view(params.id)
+      return res.send({ result: user })
     } catch (e) {
       console.error(e)
       return res.status(500).send({
@@ -41,10 +41,10 @@ export class UserController extends BaseResourceController {
 
   async list({ body, query }: Request, res: Response) {
     try {
-      // const devices = await devicesService.list(req.body)
+      // const users = await usersService.list(req.body)
       //
       // return res.send({
-      //   result: devices
+      //   result: users
       // })
     } catch (e) {
       console.error(e)
@@ -69,13 +69,13 @@ export class UserController extends BaseResourceController {
     }
   }
 
-  async update({ body, query }: Request, res: Response) {
+  async update({ body, params }: Request, res: Response) {
     try {
-      // const devices = await devicesService.update(req)
-      //
-      // return res.status(200).send({
-      //   result: devices
-      // })
+      const user = await this.userUseCase.update(params.id, body)
+
+      return res.send({
+        result: user
+      })
     } catch (e) {
       console.error(e)
       return res.status(500).send({
@@ -84,12 +84,10 @@ export class UserController extends BaseResourceController {
     }
   }
 
-  async remove({}: Request, res: Response) {
+  async remove({ params }: Request, res: Response) {
     try {
-      // const devices = await devicesService.remove(req.params)
-      // return res.status(200).send({
-      //   result: devices
-      // })
+      const devices = await this.userUseCase.remove(params.id)
+      return res.send({ result: devices })
     } catch (e) {
       console.error(e)
       return res.status(500).send({

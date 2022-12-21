@@ -28,15 +28,46 @@ export class UserUseCase {
   }) {
     const userValue = new UserValue({ name, email, password, role, description })
 
-    const exists = await this.userRepository.view(userValue.email)
-    if (!exists) {
+    const exists = await this.userRepository.findByEmail(userValue.email)
+    if (exists) {
       throw new Error(`User with email ${userValue.email} exists already`)
-      return
     }
 
     const userCreated = await this.userRepository.create(userValue)
     return userCreated
   }
-  public async update() {}
-  public async remove() {}
+  public async update(
+    id,
+    {
+      name,
+      email,
+      password,
+      description,
+      role
+    }: {
+      name: string
+      email: string
+      password: string
+      description: string
+      role: string
+    }
+  ) {
+    const userValue = new UserValue({ name, email, password, role, description })
+
+    const exists = await this.userRepository.view(id)
+    if (!exists) {
+      throw new Error(`User with id ${id} not exists`)
+    }
+
+    const userUpdated = await this.userRepository.update(id, userValue)
+    return userUpdated
+  }
+  public async remove(id: number) {
+    const exists = await this.userRepository.view(id)
+    if (!exists) {
+      throw new Error(`User with id ${id} not exists`)
+    }
+    const removedUser = await this.userRepository.remove(id)
+    return removedUser
+  }
 }

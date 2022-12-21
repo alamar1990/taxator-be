@@ -25,13 +25,21 @@ export class MySqlRepository implements UserRepository {
     return user
   }
 
-  async update(id): Promise<UserEntity> {
-    const user = await UserModel.findByPk(id)
+  async update(id: number, userIn: UserEntity): Promise<UserEntity> {
+    const user = await UserModel.update(userIn, {
+      where: {
+        id
+      }
+    })
     return user
   }
-  async updateUserById(id: number): Promise<UserEntity | null> {
-    const user = await UserModel.findByPk({ id })
 
+  async remove(id): Promise<UserEntity> {
+    const user = await UserModel.destroy({
+      where: {
+        id: id
+      }
+    })
     return user
   }
 }

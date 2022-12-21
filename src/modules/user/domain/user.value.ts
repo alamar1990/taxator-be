@@ -2,10 +2,10 @@ import { UserEntity } from './user.entity'
 import { v4 as uuid } from 'uuid'
 
 export class UserValue implements UserEntity {
-  description: string
+  name: string
   email: string
   password: string
-  name: string
+  description: string
   role: string
   uuid: string
 
@@ -22,11 +22,11 @@ export class UserValue implements UserEntity {
     description?: string
     role: string
   }) {
-    this.uuid = uuid()
     this.name = name
-    this.password = password
-    this.role = role
     this.email = email
+    this.password = password
+    this.uuid = uuid()
     this.description = description ?? 'default'
+    this.role = role
   }
 }
