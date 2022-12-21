@@ -27,6 +27,13 @@ export class UserUseCase {
     role: string
   }) {
     const userValue = new UserValue({ name, email, password, role, description })
+
+    const exists = await this.userRepository.view(userValue.email)
+    if (!exists) {
+      throw new Error(`User with email ${userValue.email} exists already`)
+      return
+    }
+
     const userCreated = await this.userRepository.create(userValue)
     return userCreated
   }

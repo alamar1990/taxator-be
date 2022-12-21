@@ -15,14 +15,6 @@ export class MySqlRepository implements UserRepository {
   }
 
   async create(userIn: UserEntity): Promise<UserEntity> {
-    const exists = await UserModel.findOne({
-      where: {
-        email: userIn.email
-      }
-    })
-    if (exists) {
-      throw new Error('User already exists')
-    }
     const user = new UserModel(userIn)
     await user.save()
     return user
