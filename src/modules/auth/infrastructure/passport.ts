@@ -1,6 +1,8 @@
 import passport from 'passport'
 import passportJwt from 'passport-jwt'
+import { config } from '../../../config'
 import UserSchemaSequelize from '../../user/infrastructure/model/user.schema.sequelize'
+
 const ExtractJwt = passportJwt.ExtractJwt
 const StrategyJwt = passportJwt.Strategy
 
@@ -8,7 +10,7 @@ passport.use(
   new StrategyJwt(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_SECRET
+      secretOrKey: config.JWT_SECRET
     },
     function (jwtPayload, done) {
       return UserSchemaSequelize.findOne({ where: { id: jwtPayload.id } })

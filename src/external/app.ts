@@ -6,7 +6,8 @@ import loginRoute from '../modules/auth/infrastructure/route/login.route'
 import protectedRoute from '../modules/protected/infrastructure/route/protected.route'
 import { sequelizeDbInit } from '../modules/user/infrastructure/db/mysql'
 
-// import { apiRoutes } from './routes'
+// Add Passport module
+import '../modules/auth/infrastructure/passport'
 
 const app = express()
 
