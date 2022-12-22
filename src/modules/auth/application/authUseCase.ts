@@ -1,4 +1,4 @@
-import { UserRepository } from '../domain/user.repository'
+import { UserRepository } from '../../user/domain/user.repository'
 import { compare } from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { config } from '../../../config'
