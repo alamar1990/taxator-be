@@ -18,7 +18,7 @@ export class AuthUseCase {
       throw new Error(`Email or password does not match!`)
     }
     const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, config.JWT_SECRET, {
-      expiresIn: '12h'
+      expiresIn: config.JWT_TOKEN_EXPIRATION
     })
     if (!jwtToken) {
       throw new Error(`Error generating token: ${jwtToken}`)
