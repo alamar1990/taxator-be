@@ -8,6 +8,7 @@ import { MySqlRepository } from '../../../user/infrastructure/repository/mysql.r
 import { UserUseCase } from '../../../user/application/userUseCase'
 import { UserController } from '../../../user/infrastructure/controller/user.controller'
 import { LoginController } from '../controller/login.controller'
+import { AuthUseCase } from '../../application/authUseCase'
 
 const loginRoute = Router()
 
@@ -16,12 +17,13 @@ const userRepo = new MySqlRepository()
 /**
  * Use cases
  */
-const userUseCase = new UserUseCase(userRepo)
+// const userUseCase = new UserUseCase(userRepo)
+const authUseCase = new AuthUseCase(userRepo)
 
 /**
  * User controllers
  */
-const loginController = new LoginController(userUseCase)
+const loginController = new LoginController(authUseCase)
 
 loginRoute.post('/login', loginController.login)
 
