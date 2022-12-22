@@ -4,8 +4,8 @@ import { BaseResourceController } from '../../../../resources/baseResourceContro
 import { UserUseCase } from '../../application/userUseCase'
 import { Request, Response } from 'express'
 
-// const { devicesService } = require('./Devices.service')
 export class UserController extends BaseResourceController {
+  // CRUD
   constructor(private userUseCase: UserUseCase) {
     super()
     this.all = this.all.bind(this)
@@ -88,6 +88,20 @@ export class UserController extends BaseResourceController {
     try {
       const devices = await this.userUseCase.remove(params.id)
       return res.send({ result: devices })
+    } catch (e) {
+      console.error(e)
+      return res.status(500).send({
+        message: `[CONTROLLER ERROR] ${e}`
+      })
+    }
+  }
+
+  // **********************************
+
+  async findByEmail({ body }: Request, res: Response) {
+    try {
+      const user = await this.userUseCase.findByEmail(body.email)
+      return res.send({ result: user })
     } catch (e) {
       console.error(e)
       return res.status(500).send({

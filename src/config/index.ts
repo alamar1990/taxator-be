@@ -20,6 +20,7 @@ export type Configuration = {
   DB_NAME: string
   DB_HOST: string
   APP_DATABASE_URL: string
+  JWT_SECRET: string
 
   APP_LOG_LEVEL: string
 }

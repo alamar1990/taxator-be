@@ -2,6 +2,7 @@ import { UserRepository } from '../domain/user.repository'
 import { UserValue } from '../domain/user.value'
 
 export class UserUseCase {
+  // CRUD use cases
   constructor(private readonly userRepository: UserRepository) {}
 
   public async all() {
@@ -69,5 +70,12 @@ export class UserUseCase {
     }
     const removedUser = await this.userRepository.remove(id)
     return removedUser
+  }
+
+  //*****************************
+
+  public async findByEmail(email: number) {
+    const user = await this.userRepository.findByEmail(email)
+    return user
   }
 }
