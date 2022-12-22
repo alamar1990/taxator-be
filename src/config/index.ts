@@ -21,6 +21,7 @@ export type Configuration = {
   DB_HOST: string
   APP_DATABASE_URL: string
   JWT_SECRET: string
+  JWT_TOKEN_EXPIRATION: string
 
   APP_LOG_LEVEL: string
 }

@@ -10,6 +10,7 @@ const DEV: Configuration = {
   DB_MONGO_PASSWORD: process.env.DB_MONGO_PASSWORD || '',
   APP_NAME: process.env.APP_NAME || 'taxator-be',
   JWT_SECRET: process.env.JWT_SECRET || '',
+  JWT_TOKEN_EXPIRATION: process.env.JWT_TOKEN_EXPIRATION || '1d',
   DB_HOST: process.env.DB_HOST || '',
   APP_DATABASE_URL: process.env.APP_DATABASE_URL || '',
   APP_LOG_LEVEL: process.env.APP_LOG_LEVEL || 'debug'
