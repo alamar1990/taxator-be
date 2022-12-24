@@ -25,6 +25,7 @@ const authUseCase = new AuthUseCase(userRepo)
  */
 const loginController = new LoginController(authUseCase)
 
-loginRoute.post('/login', loginController.login)
+loginRoute.post('/auth/login', loginController.login)
+loginRoute.post('/auth/get-user', loginController.getUser)
 
 export default loginRoute

@@ -8,21 +8,35 @@ export class AuthUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   public async getJwtToken({ email, password }: { email: string; password: string }) {
-    const userWithEmail = await new UserUseCase(this.userRepository).findByEmail(email)
+    try {
+      const userWithEmail = await new UserUseCase(this.userRepository).findByEmail(email)
 
-    if (!userWithEmail) {
-      throw new Error(`Email or password does not match!`)
+      if (!userWithEmail) {
+        throw new Error(`Email or password does not match!`)
+      }
+      const match = await compare(password, userWithEmail.password)
+      if (!match) {
+        throw new Error(`Email or password does not match!`)
+      }
+      const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, config.JWT_SECRET, {
+        expiresIn: config.JWT_TOKEN_EXPIRATION
+      })
+      if (!jwtToken) {
+        throw new Error(`Error generating token: ${jwtToken}`)
+      }
+      return jwtToken
+    } catch (e) {
+      throw e
     }
-    const match = await compare(password, userWithEmail.password)
-    if (!match) {
-      throw new Error(`Email or password does not match!`)
+  }
+  public async getUserByToken(token: string) {
+    try {
+      const jwt_payload = jwt.decode(token)
+      const { email } = jwt_payload
+      const user = await new UserUseCase(this.userRepository).findByEmail(email)
+      return user
+    } catch (e) {
+      throw e
     }
-    const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, config.JWT_SECRET, {
-      expiresIn: config.JWT_TOKEN_EXPIRATION
-    })
-    if (!jwtToken) {
-      throw new Error(`Error generating token: ${jwtToken}`)
-    }
-    return jwtToken
   }
 }
