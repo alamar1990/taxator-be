@@ -18,7 +18,7 @@ export class AuthUseCase {
       if (!match) {
         throw new Error(`Email or password does not match!`)
       }
-      const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, config.JWT_SECRET, {
+      const jwtToken = jwt.sign({ id: userWithEmail.id }, config.JWT_SECRET, {
         expiresIn: config.JWT_TOKEN_EXPIRATION
       })
       if (!jwtToken) {
@@ -29,12 +29,27 @@ export class AuthUseCase {
       throw e
     }
   }
-  public async getUserByToken(token: string) {
+
+  isTokenExpired(exp: number) {
+    const tokenExpirationDate = new Date(exp * 1000)
+    const today = new Date()
+    return today > tokenExpirationDate
+  }
+  getUserData(id: number) {
+    if (!id) throw new Error('No User ID provided')
+    return new UserUseCase(this.userRepository).view(id)
+  }
+  public async getUser(token: string) {
     try {
       const jwt_payload = jwt.decode(token)
-      const { email } = jwt_payload
-      const user = await new UserUseCase(this.userRepository).findByEmail(email)
-      return user
+      if (!jwt_payload) throw new Error('Provided token is not valid')
+      const { id, exp } = jwt_payload
+      const isExpired = this.isTokenExpired(exp)
+      if (isExpired) throw new Error('Provided token is expired')
+      const userData = await this.getUserData(id)
+      const rawData = userData.toJSON()
+      delete rawData?.password
+      return rawData
     } catch (e) {
       throw e
     }

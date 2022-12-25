@@ -21,7 +21,7 @@ export class LoginController {
   }
   async getUser({ body }: Request, res: Response) {
     try {
-      const user = await this.authUseCase.getUserByToken(body.token)
+      const user = await this.authUseCase.getUser(body.token)
       return res.json({ user: user })
     } catch (e) {
       console.error(e)
