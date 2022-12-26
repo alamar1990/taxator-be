@@ -22,7 +22,7 @@ const options: cors.CorsOptions = {
 }
 
 app.use(express.json())
-app.use(cors(options))
+app.use(cors())
 
 // User routes
 app.use(userRoute)
