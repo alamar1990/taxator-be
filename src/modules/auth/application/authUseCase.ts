@@ -47,6 +47,7 @@ export class AuthUseCase {
       const isExpired = this.isTokenExpired(exp)
       if (isExpired) throw new Error('Provided token is expired')
       const userData = await this.getUserData(id)
+      if (!userData) throw new Error('User by ID not found')
       const rawData = userData.toJSON()
       delete rawData?.password
       return rawData
