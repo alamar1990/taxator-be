@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoDbInit from '../modules/user/infrastructure/db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
-import loginRoute from '../modules/auth/infrastructure/route/login.route'
+import authRoute from '../modules/auth/infrastructure/route/auth.route'
 import protectedRoute from '../modules/protected/infrastructure/route/protected.route'
 import { sequelizeDbInit } from '../modules/user/infrastructure/db/mysql'
 
@@ -28,7 +28,7 @@ app.use(cors())
 app.use(userRoute)
 
 // Login routes
-app.use(loginRoute)
+app.use(authRoute)
 
 // TEST ROUTES
 app.use(protectedRoute)
