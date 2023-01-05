@@ -18,13 +18,16 @@ export class AuthUseCase {
       if (!match) {
         throw new Error(`Email or password does not match!`)
       }
-      const jwtToken = jwt.sign({ id: userWithEmail.id }, config.JWT_SECRET, {
+      const accessToken = jwt.sign({ id: userWithEmail.id }, config.JWT_SECRET, {
         expiresIn: config.JWT_TOKEN_EXPIRATION
       })
-      if (!jwtToken) {
-        throw new Error(`Error generating token: ${jwtToken}`)
+      const refreshToken = jwt.sign({ id: userWithEmail.id }, config.JWT_REFRESH_SECRET, {
+        expiresIn: config.JWT_REFRESH_TOKEN_EXPIRATION
+      })
+      if (!accessToken || !refreshToken) {
+        throw new Error(`Error generating a token`)
       }
-      return jwtToken
+      return { accessToken, refreshToken }
     } catch (e) {
       throw e
     }
@@ -44,13 +47,35 @@ export class AuthUseCase {
       const jwt_payload = jwt.decode(token)
       if (!jwt_payload) throw new Error('Provided token is not valid')
       const { id, exp } = jwt_payload
-      const isExpired = this.isTokenExpired(exp)
-      if (isExpired) throw new Error('Provided token is expired')
+      // const isExpired = this.isTokenExpired(exp)
+      // if (isExpired) throw new Error('Provided token is expired')
       const userData = await this.getUserData(id)
       if (!userData) throw new Error('User by ID not found')
       const rawData = userData.toJSON()
       delete rawData?.password
       return rawData
+    } catch (e) {
+      throw e
+    }
+  }
+  public async refreshToken(refreshToken: string) {
+    try {
+      const jwt_payload = jwt.decode(refreshToken)
+      if (!jwt_payload) throw new Error('Provided refresh token is not valid')
+      const { id, exp } = jwt_payload
+      const isExpired = this.isTokenExpired(exp)
+      if (isExpired) throw new Error('Provided refresh token is expired')
+      const userData = await this.getUserData(id)
+      if (!userData) throw new Error('User by ID not found')
+      const jwtNewAccessToken = jwt.sign({ id: userData.id }, config.JWT_SECRET, {
+        expiresIn: config.JWT_TOKEN_EXPIRATION
+      })
+      return jwtNewAccessToken
+      // const userData = await this.getUserData(id)
+      // if (!userData) throw new Error('User by ID not found')
+      // const rawData = userData.toJSON()
+      // delete rawData?.password
+      // return rawData
     } catch (e) {
       throw e
     }
