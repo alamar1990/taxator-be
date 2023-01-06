@@ -34,7 +34,7 @@ export class AuthController {
   }
   async checkToken({ body }: Request, res: Response) {
     try {
-      if (!body.token) return res.status(401).json({ isValid: false })
+      if (!body.token) return res.status(200).json({ isValid: false })
       const isValid = await this.authUseCase.getUser(body.token)
       if (!isValid) return res.json({ isValid: false })
       return res.json({ isValid: true })

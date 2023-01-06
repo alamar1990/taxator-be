@@ -71,11 +71,6 @@ export class AuthUseCase {
         expiresIn: config.JWT_TOKEN_EXPIRATION
       })
       return jwtNewAccessToken
-      // const userData = await this.getUserData(id)
-      // if (!userData) throw new Error('User by ID not found')
-      // const rawData = userData.toJSON()
-      // delete rawData?.password
-      // return rawData
     } catch (e) {
       throw e
     }
