@@ -8,7 +8,9 @@
     "dev": "ts-node -T ./src/server.ts",
     "watch": "nodemon --watch './src/**/*.ts' --ignore '.src/**/*.spec.ts' --exec 'ts-node -T' ./src/server.ts",
     "run": "ts-node ./src/server.ts",
-    "tsc": "tsc",
+    "build": "tsc",
+    "start": "set NODE_ENV=production && node build/server.js",
+    "start:dev": "node build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alain Marquez",

@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 // @ts-ignore
-import { compression } from 'compression'
+// import { compression } from 'compression'
 import helmet from 'helmet'
 import mongoDbInit from '../modules/user/infrastructure/db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
@@ -28,7 +28,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use(helmet()) // HTTP Headers Security
-app.use(compression()) // Compress all routes
+// app.use(compression()) // Compress all routes
 
 // User routes
 app.use(userRoute)
