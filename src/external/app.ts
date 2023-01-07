@@ -1,11 +1,12 @@
 import express from 'express'
 import cors from 'cors'
+import compression from 'compression'
+import helmet from 'helmet'
 import mongoDbInit from '../modules/user/infrastructure/db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
 import authRoute from '../modules/auth/infrastructure/route/auth.route'
 import protectedRoute from '../modules/protected/infrastructure/route/protected.route'
 import { sequelizeDbInit } from '../modules/user/infrastructure/db/mysql'
-
 // Add Passport module
 import '../modules/auth/infrastructure/passport'
 
@@ -23,6 +24,9 @@ const options: cors.CorsOptions = {
 
 app.use(express.json())
 app.use(cors())
+
+app.use(helmet()) // HTTP Headers Security
+app.use(compression()) // Compress all routes
 
 // User routes
 app.use(userRoute)
