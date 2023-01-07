@@ -10,7 +10,7 @@
     "run": "ts-node ./src/server.ts",
     "build": "tsc",
     "start": "set NODE_ENV=production&&node build/server.js",
-    "start:prod:pm2": "export NODE_ENV=production&&pm2 start build/server.js",
+    "pm2": "export NODE_ENV=production&&pm2 start build/server.js",
     "start:dev": "node build/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
