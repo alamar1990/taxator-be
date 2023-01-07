@@ -15,7 +15,6 @@ export type Configuration = {
   DB_MYSQL_PASSWORD: string
   DB_MONGO_USERNAME: string
   DB_MONGO_PASSWORD: string
-  DB_USERNAME: string
   APP_NAME: string
   DB_NAME: string
   DB_HOST: string

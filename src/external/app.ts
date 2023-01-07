@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import compression from 'compression'
+// @ts-ignore
+import { compression } from 'compression'
 import helmet from 'helmet'
 import mongoDbInit from '../modules/user/infrastructure/db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
@@ -14,6 +15,7 @@ const app = express()
 
 app.disable('x-powered-by')
 
+// @ts-ignore
 const options: cors.CorsOptions = {
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
   credentials: true,
