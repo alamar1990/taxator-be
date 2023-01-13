@@ -1,10 +1,10 @@
 import { BaseResourceController } from '../../../../resources/baseResourceController'
-import { UserUseCase } from '../../application/userUseCase'
 import { Request, Response } from 'express'
+import { ClientUseCase } from '../../application/clientUseCase'
 
-export class UserController extends BaseResourceController {
+export class ClientController extends BaseResourceController {
   // CRUD
-  constructor(private userUseCase: UserUseCase) {
+  constructor(private clientUseCase: ClientUseCase) {
     super()
     this.all = this.all.bind(this)
     this.list = this.list.bind(this)
@@ -15,8 +15,8 @@ export class UserController extends BaseResourceController {
   }
   async all({}: Request, res: Response) {
     try {
-      const users = await this.userUseCase.all()
-      return res.send({ result: users })
+      const clients = await this.clientUseCase.all()
+      return res.send({ result: clients })
     } catch (e) {
       console.error(e)
       return res.status(500).send({
@@ -27,8 +27,8 @@ export class UserController extends BaseResourceController {
 
   async view({ params }: Request, res: Response) {
     try {
-      const user = await this.userUseCase.view(params.id)
-      return res.send({ result: user })
+      const client = await this.clientUseCase.view(params.id)
+      return res.send({ result: client })
     } catch (e) {
       console.error(e)
       return res.status(500).send({
@@ -39,10 +39,10 @@ export class UserController extends BaseResourceController {
 
   async list({ body, query }: Request, res: Response) {
     try {
-      // const users = await usersService.list(req.body)
+      // const clients = await clientsService.list(req.body)
       //
       // return res.send({
-      //   result: users
+      //   result: clients
       // })
     } catch (e) {
       console.error(e)
@@ -54,10 +54,10 @@ export class UserController extends BaseResourceController {
 
   async create({ body, query }: Request, res: Response) {
     try {
-      const user = await this.userUseCase.create(body)
+      const client = await this.clientUseCase.create(body)
 
       return res.send({
-        result: user
+        result: client
       })
     } catch (e) {
       console.error(e)
@@ -69,10 +69,10 @@ export class UserController extends BaseResourceController {
 
   async update({ body, params }: Request, res: Response) {
     try {
-      const user = await this.userUseCase.update(params.id, body)
+      const client = await this.clientUseCase.update(params.id, body)
 
       return res.send({
-        result: user
+        result: client
       })
     } catch (e) {
       console.error(e)
@@ -84,7 +84,7 @@ export class UserController extends BaseResourceController {
 
   async remove({ params }: Request, res: Response) {
     try {
-      const devices = await this.userUseCase.remove(params.id)
+      const devices = await this.clientUseCase.remove(params.id)
       return res.send({ result: devices })
     } catch (e) {
       console.error(e)
@@ -96,10 +96,11 @@ export class UserController extends BaseResourceController {
 
   // **********************************
 
-  async findByEmail({ body }: Request, res: Response) {
+  async readFile({ body }: Request, res: Response) {
     try {
-      const user = await this.userUseCase.findByEmail(body.email)
-      return res.send({ result: user })
+      const fileBlob = {}
+      const parsedData = await this.clientUseCase.gatherClientData(fileBlob)
+      return res.send({ result: parsedData })
     } catch (e) {
       console.error(e)
       return res.status(500).send({

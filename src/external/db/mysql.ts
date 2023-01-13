@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize'
-import { config } from '../../../../config'
+import { config } from '../../config'
 
 export const mysqlDB = new Sequelize(config.DB_NAME, config.DB_MYSQL_USERNAME, config.DB_MYSQL_PASSWORD, {
   host: config.DB_HOST,

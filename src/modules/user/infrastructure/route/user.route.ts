@@ -6,7 +6,6 @@ import { MongoRepository } from '../repository/mongo.repository'
 import { MySqlRepository } from '../repository/mysql.repository'
 
 import resource from '../../../../resources/baseRouteCRUDresource'
-// import { baseControllerCRUDResource } from '../../../../resources/baseControllerCRUDResource'
 
 const userRoute = Router()
 /**

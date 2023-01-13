@@ -3,13 +3,14 @@ import cors from 'cors'
 // @ts-ignore
 // import { compression } from 'compression'
 import helmet from 'helmet'
-import mongoDbInit from '../modules/user/infrastructure/db/mongo'
+import mongoDbInit from './db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
 import authRoute from '../modules/auth/infrastructure/route/auth.route'
 import protectedRoute from '../modules/protected/infrastructure/route/protected.route'
-import { sequelizeDbInit } from '../modules/user/infrastructure/db/mysql'
+import { sequelizeDbInit } from './db/mysql'
 // Add Passport module
 import '../modules/auth/infrastructure/passport'
+import clientRoute from '../modules/client/infrastructure/route/client.route'
 
 const app = express()
 
@@ -33,10 +34,13 @@ app.use(helmet()) // HTTP Headers Security
 // User routes
 app.use(userRoute)
 
+// Client routes
+app.use(clientRoute)
+
 // Login routes
 app.use(authRoute)
 
-// TEST ROUTES
+// PROTECTED TEST ROUTES
 app.use(protectedRoute)
 
 // MongoDB Init

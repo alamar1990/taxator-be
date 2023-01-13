@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { hash } from 'bcrypt'
 
-import { mysqlDB } from '../db/mysql'
+import { mysqlDB } from '../../../../external/db/mysql'
 
 const UserModel = mysqlDB.define(
   'user',
