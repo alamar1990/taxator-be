@@ -3,6 +3,7 @@ import cors from 'cors'
 // @ts-ignore
 // import { compression } from 'compression'
 import helmet from 'helmet'
+import fileUpload from 'express-fileupload'
 import mongoDbInit from './db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
 import authRoute from '../modules/auth/infrastructure/route/auth.route'
@@ -30,6 +31,8 @@ app.use(cors())
 
 app.use(helmet()) // HTTP Headers Security
 // app.use(compression()) // Compress all routes
+
+app.use(fileUpload()) // Handle file uploads
 
 // User routes
 app.use(userRoute)

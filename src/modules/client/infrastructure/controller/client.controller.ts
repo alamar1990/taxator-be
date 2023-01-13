@@ -12,6 +12,7 @@ export class ClientController extends BaseResourceController {
     this.create = this.create.bind(this)
     this.update = this.update.bind(this)
     this.remove = this.remove.bind(this)
+    this.readFile = this.readFile.bind(this)
   }
   async all({}: Request, res: Response) {
     try {
@@ -96,10 +97,11 @@ export class ClientController extends BaseResourceController {
 
   // **********************************
 
-  async readFile({ body }: Request, res: Response) {
+  async readFile(req: Request, res: Response) {
     try {
-      const fileBlob = {}
-      const parsedData = await this.clientUseCase.gatherClientData(fileBlob)
+      const fileBlob = req.files
+      if (!fileBlob) throw new Error('No file was sent')
+      const parsedData = await this.clientUseCase.parseClientData(fileBlob)
       return res.send({ result: parsedData })
     } catch (e) {
       console.error(e)

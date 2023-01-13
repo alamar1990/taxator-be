@@ -110,10 +110,9 @@ export class ClientUseCase {
   }
 
   //*****************************
-  public async gatherClientData(fileToParse) {
+  public async parseClientData(fileToParse) {
     const clientData = {}
 
-    const client = await this.clientRepository.gatherClientData(clientData)
-    return client
+    return clientData
   }
 }
