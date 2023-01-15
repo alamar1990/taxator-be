@@ -5,6 +5,9 @@ import resource from '../../../../resources/baseRouteCRUDresource'
 import { ClientUseCase } from '../../application/clientUseCase'
 import { ClientController } from '../controller/client.controller'
 import { authenticate } from '../../../auth/infrastructure/middleware/authChecks'
+import multer from 'multer'
+import path from 'path'
+import { config } from '../../../../config'
 
 const clientRoute = Router()
 /**
@@ -23,6 +26,18 @@ const userUseCase = new ClientUseCase(clientRepo)
 
 const clientCtrl = new ClientController(userUseCase)
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     return cb(null, path.join(__dirname, '../../../../../', config.CLIENTS_UPLOADS_DIR))
+//   },
+//   filename: (req, file, cb) => {
+//     const ext = file.originalname.split('.').reverse()[0]
+//     const fileName = `${file.originalname}-${Date.now().toString()}.${ext}`
+//     return cb(null, fileName)
+//   }
+// })
+//
+// const uploader = multer({ storage: storage })
 /**
  *
  */

@@ -9,6 +9,7 @@ const DEV: Configuration = {
   DB_MONGO_USERNAME: process.env.DB_MONGO_USERNAME || '',
   DB_MONGO_PASSWORD: process.env.DB_MONGO_PASSWORD || '',
   APP_NAME: process.env.APP_NAME || 'taxator-be',
+  CLIENTS_UPLOADS_DIR: process.env.CLIENTS_UPLOADS_DIR || '/uploads/client',
   JWT_SECRET: process.env.JWT_SECRET || '',
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || '',
   JWT_TOKEN_EXPIRATION: process.env.JWT_TOKEN_EXPIRATION || '1d',

@@ -16,6 +16,7 @@ export type Configuration = {
   DB_MONGO_USERNAME: string
   DB_MONGO_PASSWORD: string
   APP_NAME: string
+  CLIENTS_UPLOADS_DIR: string
   DB_NAME: string
   DB_HOST: string
   APP_DATABASE_URL: string

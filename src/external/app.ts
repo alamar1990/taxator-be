@@ -4,13 +4,12 @@ import cors from 'cors'
 // import { compression } from 'compression'
 import helmet from 'helmet'
 import fileUpload from 'express-fileupload'
+import '../modules/auth/infrastructure/passport'
 import mongoDbInit from './db/mongo'
 import userRoute from '../modules/user/infrastructure/route/user.route'
 import authRoute from '../modules/auth/infrastructure/route/auth.route'
 import protectedRoute from '../modules/protected/infrastructure/route/protected.route'
 import { sequelizeDbInit } from './db/mysql'
-// Add Passport module
-import '../modules/auth/infrastructure/passport'
 import clientRoute from '../modules/client/infrastructure/route/client.route'
 
 const app = express()
