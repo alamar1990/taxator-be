@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import path from 'path'
 import * as readline from 'readline'
 import { config } from '../../../config'
-import { parseName } from './utils/parseFunctions'
+import { agiParse, parseAddressAndSsn, parseName, parsePhone, parseSsn, refundDueParse } from './utils/parseFunctions'
 import { ClientRepository } from '../domain/client.repository'
 import { ClientValue } from '../domain/client.value'
 
@@ -149,6 +149,23 @@ export class ClientUseCase {
       if (lineNumber === 4) {
         const name = parseName(line)
         clientData.name = name
+      }
+
+      if (lineNumber === 5) {
+        const { address, p_ssn, s_ssn } = parseAddressAndSsn(line)
+        clientData.address = address
+        clientData.p_ssn = p_ssn
+        clientData.s_ssn = s_ssn
+      }
+
+      if (lineNumber === 11) {
+        const { agi } = agiParse(line)
+        clientData.agi = agi
+      }
+
+      if (lineNumber === 14) {
+        const { refundDue } = refundDueParse(line)
+        clientData.refundDue = refundDue
       }
 
       lineNumber++
