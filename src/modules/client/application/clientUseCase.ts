@@ -1,10 +1,10 @@
+import * as fs from 'fs'
+import path from 'path'
+import * as readline from 'readline'
+import { config } from '../../../config'
+import { parseName } from './utils/parseFunctions'
 import { ClientRepository } from '../domain/client.repository'
 import { ClientValue } from '../domain/client.value'
-import { Readable } from 'stream'
-import * as fs from 'fs'
-import { Request } from 'express'
-import path from 'path'
-import { config } from '../../../config'
 
 export class ClientUseCase {
   // CRUD use cases
@@ -127,21 +127,32 @@ export class ClientUseCase {
         config.CLIENTS_UPLOADS_DIR
       )}/${Date.now().toString()}-${fileToSave.name}`
       await fileToSave.mv(fullFilePath)
-      return true
+      return fullFilePath
     } catch (e) {
       throw e
     }
   }
 
   public async parseClientData() {
-    console.log({ id: true })
-    // const contents = fs.readFile(fileToParse, { encoding: 'base64' })
-    // const base64String = new Buffer(fileToParse.data).toString('base64')
-    // const binaryData = fs.readFileSync(base64String, { encoding: 'base64' })
-    //
-    // const stream = Readable.from(fileToParse.data)
-
+    const fullFilePath = `${path.join(__dirname, '../../../../', config.CLIENTS_UPLOADS_DIR)}/1673766276530-a.txt`
+    const fileStream = fs.createReadStream(fullFilePath)
+    const rl = readline.createInterface({
+      input: fileStream,
+      crlfDelay: Infinity
+    })
     const clientData = {}
+
+    let lineNumber = 1
+    for await (const line of rl) {
+      console.log(`${lineNumber} -> ${line}`)
+
+      if (lineNumber === 4) {
+        const name = parseName(line)
+        clientData.name = name
+      }
+
+      lineNumber++
+    }
 
     return clientData
   }
