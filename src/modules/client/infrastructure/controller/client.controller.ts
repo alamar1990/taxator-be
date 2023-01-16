@@ -99,13 +99,13 @@ export class ClientController extends BaseResourceController {
 
   async readFile(req: Request, res: Response) {
     try {
-      // const files = req.files
-      // // if (!files) throw new Error('No file was sent')
-      // // const isFileSaved = await this.clientUseCase.saveUploadedClientFile(files)
-      // if (!isFileSaved) throw new Error('The file was saved')
+      const files = req.files
+      if (!files) throw new Error('No file was sent')
+      const fileSaved = await this.clientUseCase.saveUploadedClientFile(files)
+      if (!fileSaved) throw new Error('The file was saved')
 
       // const parsedData = await this.clientUseCase.parseClientData()
-      const parsedData = await this.clientUseCase.parseClientDataString()
+      const parsedData = await this.clientUseCase.parseClientDataString(fileSaved)
       return res.send({ result: parsedData })
     } catch (e) {
       console.error(e)

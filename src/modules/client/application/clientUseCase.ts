@@ -181,10 +181,12 @@ export class ClientUseCase {
 
     return clientData
   }
-  public async parseClientDataString() {
+  public async parseClientDataString(filePath) {
     try {
-      const fullFilePath = `${path.join(__dirname, '../../../../', config.CLIENTS_UPLOADS_DIR)}/1673766276530-a.txt`
-      const buffer = fs.readFileSync(fullFilePath)
+      const fileExists = fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()
+      if (!fileExists) throw new Error('The saved file path is not valid \n ' + filePath)
+      // const fullFilePath = `${path.join(__dirname, '../../../../', config.CLIENTS_UPLOADS_DIR)}/1673766276530-a.txt`
+      const buffer = fs.readFileSync(filePath)
       const fileContent = buffer.toString()
 
       const clientData = parseAll(fileContent)
