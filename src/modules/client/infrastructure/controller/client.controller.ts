@@ -104,7 +104,8 @@ export class ClientController extends BaseResourceController {
       // // const isFileSaved = await this.clientUseCase.saveUploadedClientFile(files)
       // if (!isFileSaved) throw new Error('The file was saved')
 
-      const parsedData = await this.clientUseCase.parseClientData()
+      // const parsedData = await this.clientUseCase.parseClientData()
+      const parsedData = await this.clientUseCase.parseClientDataString()
       return res.send({ result: parsedData })
     } catch (e) {
       console.error(e)

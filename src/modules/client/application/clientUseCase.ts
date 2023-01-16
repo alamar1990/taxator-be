@@ -2,7 +2,15 @@ import * as fs from 'fs'
 import path from 'path'
 import * as readline from 'readline'
 import { config } from '../../../config'
-import { agiParse, parseAddressAndSsn, parseName, parsePhone, parseSsn, refundDueParse } from './utils/parseFunctions'
+import {
+  agiParse,
+  parseAddressAndSsn,
+  parseAll,
+  parseName,
+  parsePhone,
+  parseSsn,
+  refundDueParse
+} from './utils/parseFunctions'
 import { ClientRepository } from '../domain/client.repository'
 import { ClientValue } from '../domain/client.value'
 
@@ -172,5 +180,17 @@ export class ClientUseCase {
     }
 
     return clientData
+  }
+  public async parseClientDataString() {
+    try {
+      const fullFilePath = `${path.join(__dirname, '../../../../', config.CLIENTS_UPLOADS_DIR)}/1673766276530-a.txt`
+      const buffer = fs.readFileSync(fullFilePath)
+      const fileContent = buffer.toString()
+
+      const clientData = parseAll(fileContent)
+      return clientData
+    } catch (e) {
+      throw e
+    }
   }
 }
