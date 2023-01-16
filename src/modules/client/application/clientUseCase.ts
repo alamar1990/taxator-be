@@ -135,7 +135,7 @@ export class ClientUseCase {
         config.CLIENTS_UPLOADS_DIR
       )}/${Date.now().toString()}-${fileToSave.name}`
       await fileToSave.mv(fullFilePath)
-      return fullFilePath
+      return { filename: fileToSave.name, path: fullFilePath }
     } catch (e) {
       throw e
     }
