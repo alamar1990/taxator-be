@@ -13,6 +13,10 @@ export function parseAll(input: string) {
   const lastNumber = fromBeggininToAddress.match(/(\d+)(?=[^\d]+$)/g)[0]
   const name = input.substring(input.indexOf(lastNumber) + 2, addressIndex).trim()
 
+  // Phone
+  const dIndex = input.indexOf('(D)')
+  const phone = input.substring(phoneIndex + 11, dIndex).trim()
+
   // SSN
   const pIndex = input.indexOf('(P)')
   const sIndex = input.indexOf('(S)')
@@ -55,7 +59,18 @@ export function parseAll(input: string) {
   const RTNIndex = input.indexOf('RTN:')
   const file_name = input.substring(fileNameIndex, RTNIndex).trim().replace('File Name:', '').replace('|', '').trim()
 
-  return { name, address: `${address} ${address2nd}`, p_ssn, s_ssn, agi, refund_due, packageId, prep_id, file_name }
+  return {
+    name,
+    address: `${address} ${address2nd}`,
+    phone,
+    p_ssn,
+    s_ssn,
+    agi,
+    refund_due,
+    packageId,
+    prep_id,
+    file_name
+  }
 }
 
 export function parseName(line: string) {
