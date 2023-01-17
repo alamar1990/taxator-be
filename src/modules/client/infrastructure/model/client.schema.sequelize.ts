@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
-import { mysqlDB } from '../../../../external/db/mysql'
+import { sequelize } from '../../../_shared/infrastructure/db/sequelizeORM'
 
-const ClientModel = mysqlDB.define('client', {
+const ClientModel = sequelize.define('client', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

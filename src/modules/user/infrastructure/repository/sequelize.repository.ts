@@ -8,7 +8,7 @@ import UserModel from '../model/user.schema.sequelize'
 /**
  * Mysql!
  */
-export class MySqlRepository implements UserRepository {
+export class SequelizeRepository implements UserRepository {
   /*
    * CRUD methods***********************
    * */

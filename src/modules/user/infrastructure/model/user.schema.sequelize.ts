@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize'
 import { hash } from 'bcrypt'
 
-import { mysqlDB } from '../../../../external/db/mysql'
+import { sequelize } from '../../../_shared/infrastructure/db/sequelizeORM'
 
-const UserModel = mysqlDB.define(
+const UserModel = sequelize.define(
   'user',
   {
     id: {

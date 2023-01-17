@@ -3,7 +3,7 @@ import { UserUseCase } from '../../application/userUseCase'
 import { UserController } from '../controller/user.controller'
 import { MockRepository } from '../repository/mock.repository'
 import { MongoRepository } from '../repository/mongo.repository'
-import { MySqlRepository } from '../repository/mysql.repository'
+import { SequelizeRepository } from '../repository/sequelize.repository'
 
 import resource from '../../../../resources/baseRouteCRUDresource'
 
@@ -13,7 +13,7 @@ const userRoute = Router()
  */
 // const userRepo = new MongoRepository()
 // const userRepo = new MockRepository()
-const userRepo = new MySqlRepository()
+const userRepo = new SequelizeRepository()
 
 /**
  * Use cases

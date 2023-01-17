@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { MySqlRepository } from '../repository/mysql.repository'
+import { SequelizeRepository } from '../repository/sequelize.repository'
 
 import resource from '../../../../resources/baseRouteCRUDresource'
 import { ClientUseCase } from '../../application/clientUseCase'
@@ -10,7 +10,7 @@ const clientRoute = Router()
 /**
  * Start Repository, here we can switch between ORMs with repositories
  */
-const clientRepo = new MySqlRepository()
+const clientRepo = new SequelizeRepository()
 
 /**
  * Use cases

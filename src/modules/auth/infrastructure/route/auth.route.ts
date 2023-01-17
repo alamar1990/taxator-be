@@ -1,13 +1,13 @@
 import { Router } from 'express'
 
-import { MySqlRepository } from '../../../user/infrastructure/repository/mysql.repository'
+import { SequelizeRepository } from '../../../user/infrastructure/repository/sequelize.repository'
 import { AuthController } from '../controller/auth.controller'
 import { AuthUseCase } from '../../application/authUseCase'
 import { authenticate } from '../middleware/authChecks'
 
 const authRoute = Router()
 
-const userRepo = new MySqlRepository()
+const userRepo = new SequelizeRepository()
 
 /**
  * Use cases

@@ -8,7 +8,7 @@ import { ClientEntity } from '../../domain/client.entity'
 /**
  * Mysql!
  */
-export class MySqlRepository implements ClientRepository {
+export class SequelizeRepository implements ClientRepository {
   /*
    * CRUD methods***********************
    * */
