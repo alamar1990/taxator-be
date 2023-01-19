@@ -7,7 +7,13 @@ export const sequelize = new Sequelize(
   config.DB_SEQUELIZE_PASSWORD,
   {
     host: config.DB_SEQUELIZE_HOST,
-    dialect: <Dialect>config.DB_SEQUELIZE_DIALECT
+    dialect: <Dialect>config.DB_SEQUELIZE_DIALECT,
+    dialectOptions: {
+      // ssl: {
+      //   require: false,
+      //   rejectUnauthorized: false
+      // }
+    }
   }
 )
 
