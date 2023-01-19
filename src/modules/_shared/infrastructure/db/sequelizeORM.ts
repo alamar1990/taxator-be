@@ -1,16 +1,21 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize, Dialect } from 'sequelize'
 import { config } from '../../../../config'
 
-export const sequelize = new Sequelize(config.DB_NAME, config.DB_MYSQL_USERNAME, config.DB_MYSQL_PASSWORD, {
-  host: config.DB_HOST,
-  dialect: 'mysql'
-})
+export const sequelize = new Sequelize(
+  config.DB_SEQUELIZE_DBNAME,
+  config.DB_SEQUELIZE_USERNAME,
+  config.DB_SEQUELIZE_PASSWORD,
+  {
+    host: config.DB_SEQUELIZE_HOST,
+    dialect: <Dialect>config.DB_SEQUELIZE_DIALECT
+  }
+)
 
 export const sequelizeDbInit = async () => {
   try {
     await sequelize.authenticate()
     await sequelize.sync()
-    console.log('Mysql database connected')
+    console.log('database connected')
   } catch (e) {
     console.error(`[DB ERROR] ${e}`)
   }

@@ -8,7 +8,7 @@ const mongoDbInit = async () => {
     mongoose.set('strictQuery', true)
     // @ts-ignore
     await mongoose.connect(DB_URI, {
-      dbName: config.DB_NAME,
+      dbName: config.DB_SEQUELIZE_DBNAME,
       user: config.DB_MONGO_USERNAME,
       pass: config.DB_MONGO_PASSWORD,
       useNewUrlParser: true,
