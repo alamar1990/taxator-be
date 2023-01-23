@@ -5,7 +5,7 @@ const PRO: Configuration = {
   PORT: +(process.env.PORT || 3000),
   DB_SEQUELIZE_DBNAME: process.env.DB_SEQUELIZE_DBNAME || '',
   DB_SEQUELIZE_DIALECT: process.env.DB_SEQUELIZE_DIALECT || 'mysql',
-  DB_SEQUELIZE_URI: process.env.DB_SEQUELIZE_URI || '',
+  DB_SEQUELIZE_URI: process.env.DB_SEQUELIZE_URI || null,
   DB_SEQUELIZE_USERNAME: process.env.DB_SEQUELIZE_USERNAME || '',
   DB_SEQUELIZE_PASSWORD: process.env.DB_SEQUELIZE_PASSWORD || '',
   DB_MONGO_USERNAME: process.env.DB_MONGO_USERNAME || '',

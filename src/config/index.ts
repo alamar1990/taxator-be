@@ -18,7 +18,7 @@ export type Configuration = {
   APP_NAME: string
   CLIENTS_UPLOADS_DIR: string
   DB_SEQUELIZE_DIALECT: string
-  DB_SEQUELIZE_URI: string
+  DB_SEQUELIZE_URI: string | null
   DB_SEQUELIZE_DBNAME: string
   DB_SEQUELIZE_HOST: string
   APP_DATABASE_URL: string
