@@ -1,0 +1,28 @@
+# for production
+version: '3.7'
+services:
+  postgres-database:
+    container_name: postgres-database
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Ms8744Aol28
+      POSTGRES_DB: taxator
+    volumes:
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/create_database.sql
+    image: postgres:15.1-alpine
+
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - postgres-database
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_SEQUELIZE_URI=postgres://postgres:Ms8744Aol28@localhost:5432/taxator
