@@ -10,10 +10,9 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Ms8744Aol28
       POSTGRES_DB: taxator
-    volumes:
-      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/create_database.sql
     image: postgres:15.1-alpine
-
+    networks:
+      - app-network
 
   app:
     build:
@@ -25,4 +24,16 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - DB_SEQUELIZE_URI=postgres://postgres:Ms8744Aol28@localhost:5432/taxator
+      DB_SEQUELIZE_HOST: postgres-database
+      DB_SEQUELIZE_DBNAME: taxator
+      DB_SEQUELIZE_USERNAME: postgres
+      DB_SEQUELIZE_PASSWORD: Ms8744Aol28
+      DB_SEQUELIZE_DIALECT: postgres
+#      - DB_SEQUELIZE_URI=postgres://postgres:Ms8744Aol28@192.168.0.2:5432/taxator
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
