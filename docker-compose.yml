@@ -17,6 +17,7 @@ services:
   app:
     build:
       context: .
+      dockerfile: ./Dockerfile
     depends_on:
       - postgres-database
     restart: unless-stopped
