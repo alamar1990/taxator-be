@@ -21,6 +21,7 @@ export type Configuration = {
   DB_SEQUELIZE_URI: string | null
   DB_SEQUELIZE_DBNAME: string
   DB_SEQUELIZE_HOST: string
+  DB_SEQUELIZE_PORT: number | undefined
   APP_DATABASE_URL: string
   JWT_SECRET: string
   JWT_TOKEN_EXPIRATION: string

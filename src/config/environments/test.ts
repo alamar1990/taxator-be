@@ -17,6 +17,7 @@ const DEV: Configuration = {
   JWT_TOKEN_EXPIRATION: process.env.JWT_TOKEN_EXPIRATION || '1d',
   JWT_REFRESH_TOKEN_EXPIRATION: process.env.JWT_REFRESH_TOKEN_EXPIRATION || '1d',
   DB_SEQUELIZE_HOST: process.env.DB_SEQUELIZE_HOST || '',
+  DB_SEQUELIZE_PORT: process.env.DB_SEQUELIZE_PORT || undefined,
   APP_DATABASE_URL: process.env.APP_DATABASE_URL || '',
   APP_LOG_LEVEL: process.env.APP_LOG_LEVEL || 'debug'
 }
