@@ -20,7 +20,6 @@ services:
       dockerfile: ./Dockerfile
     depends_on:
       - postgres-database
-    restart: unless-stopped
     env_file: ./.env
     ports:
       - '3000:3000'
@@ -30,7 +29,7 @@ services:
       DB_SEQUELIZE_USERNAME: postgres
       DB_SEQUELIZE_PASSWORD: Ms8744Aol28
       DB_SEQUELIZE_DIALECT: postgres
-#      - DB_SEQUELIZE_URI=postgres://postgres:Ms8744Aol28@192.168.0.2:5432/taxator
+#      - DB_SEQUELIZE_URI=postgres://postgres:Ms8744Aol28@localhost:5432/taxator
     networks:
       - app-network
 
